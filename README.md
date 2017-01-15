@@ -11,12 +11,12 @@ version: '2.0'
 
 services:
   mysql:
-    image: 'mysql:5.7'
+    image: 'mariadb'
     environment:
       - MYSQL_ROOT_PASSWORD=secret
 
   php-fpm:
-    image: wordpress:4.6-fpm
+    image: wordpress:php7.1-fpm-alpine
     environment:
       - WORDPRESS_DB_USER=root
       - WORDPRESS_DB_PASSWORD=secret
@@ -24,7 +24,7 @@ services:
       - './data/html:/var/www/html'
 
   web:
-    image: bcardiff/nginx-4-wordpress-fpm
+    image: packeteer/nginx-4-wordpress-fpm
     environment:
       - PHP_FPM_SOCK=php-fpm:9000
     ports:
